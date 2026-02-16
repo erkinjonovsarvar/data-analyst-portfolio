@@ -1,5 +1,22 @@
 # Data Analyst Portfolio
 
+## Executive Summary
+
+This project analyzes regional income disparities in Uzbekistan using official Stat.uz data.
+
+The objective was to:
+- Identify stronger and weaker regions
+- Measure income inequality across regions
+- Analyze which economic sectors influence income levels
+
+Tools used:
+- SQL for data transformation and segmentation
+- Python (Jupyter) for exploratory analysis
+- Power BI for dashboard visualization
+
+The analysis reveals noticeable regional inequality and highlights sector-driven economic differences.
+
+
 ## Project: Regional Economic Analysis of Uzbekistan
 
 ### Overview
@@ -21,6 +38,14 @@ The goal is to identify regional disparities, income segmentation, and key econo
 - `/sql` – SQL scripts for analysis
 - `/insights` – Key findings and conclusions
 - `/data_dictionary` – Description of tables and fields
-
+  
 ### Status
 🚧 In progress
+
+## Business Impact
+
+- Supports data-driven regional development decisions
+- Identifies income inequality gaps
+- Highlights sector-based economic drivers
+- Provides dashboard-based monitoring for performance tracking
+
