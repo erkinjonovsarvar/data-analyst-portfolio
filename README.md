@@ -49,3 +49,13 @@ The goal is to identify regional disparities, income segmentation, and key econo
 - Highlights sector-based economic drivers
 - Provides dashboard-based monitoring for performance tracking
 
+## Future Improvements (Roadmap)
+
+- Add year-over-year income growth analysis
+- Build inequality index (Gini-style proxy)
+- Introduce sector-weighted economic strength score
+- Implement automated data refresh pipeline
+- Deploy dashboard to cloud environment
+
+This project is designed as an evolving analytical framework rather than a static report.
+
