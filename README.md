@@ -1,5 +1,30 @@
 # Data Analyst Portfolio
 
+## 👤 About Me
+
+I am a passionate and detail-oriented Data Analyst with strong skills in SQL, Power BI, Excel, and Python. I enjoy transforming raw data into meaningful insights that help businesses make smarter decisions and improve performance.
+
+I have experience working with data cleaning, KPI analysis, dashboard development, reporting automation, and business intelligence solutions. My projects include sales analysis, employee KPI tracking, customer segmentation, financial reporting, and data visualization dashboards designed for managers and executives.
+
+I am continuously improving my analytical and technical skills by working on real-world projects and exploring modern data tools and technologies. I focus on creating clear, efficient, and business-oriented solutions that provide real value.
+
+Currently, I am building professional portfolio projects in Data Analytics, Business Intelligence, and Accounting Analytics while also improving my expertise in SQL databases, Power BI dashboards, Excel automation, and Python-based data analysis.
+
+I am highly motivated to grow as a Data Analyst and contribute to companies by turning complex data into actionable insights.
+
+---
+
+## 🛠️ Skills & Tools
+
+| Category | Tools |
+|----------|-------|
+| **Query & Database** | SQL (PostgreSQL, MySQL) · CTEs · Window Functions |
+| **Visualization** | Power BI · Excel Charts |
+| **Programming** | Python (Pandas, Matplotlib, Seaborn) · Jupyter Notebook |
+| **Analytics** | KPI Analysis · Data Cleaning · Customer Segmentation · Financial Reporting |
+
+---
+
 ## Executive Summary
 
 This project analyzes regional income disparities in Uzbekistan using official Stat.uz data.
