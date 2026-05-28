@@ -1,61 +1,71 @@
 # Data Analyst Portfolio
 
-## Executive Summary
+## 👤 About Me
 
-This project analyzes regional income disparities in Uzbekistan using official Stat.uz data.
+I am a passionate and detail-oriented Data Analyst with strong skills in SQL, Power BI, Excel, and Python. I enjoy transforming raw data into meaningful insights that help businesses make smarter decisions and improve performance.
 
-The objective was to:
-- Identify stronger and weaker regions
-- Measure income inequality across regions
-- Analyze which economic sectors influence income levels
+I have experience working with data cleaning, KPI analysis, dashboard development, reporting automation, and business intelligence solutions. My projects include sales analysis, employee KPI tracking, customer segmentation, financial reporting, and data visualization dashboards designed for managers and executives.
 
-Tools used:
-- SQL for data transformation and segmentation
-- Python (Jupyter) for exploratory analysis
-- Power BI for dashboard visualization
+I am continuously improving my analytical and technical skills by working on real-world projects and exploring modern data tools and technologies. I focus on creating clear, efficient, and business-oriented solutions that provide real value.
 
-The analysis reveals noticeable regional inequality and highlights sector-driven economic differences.
+Currently, I am building professional portfolio projects in Data Analytics, Business Intelligence, and Accounting Analytics while also improving my expertise in SQL databases, Power BI dashboards, Excel automation, and Python-based data analysis.
 
+I am highly motivated to grow as a Data Analyst and contribute to companies by turning complex data into actionable insights.
 
-## Project: Regional Economic Analysis of Uzbekistan
+---
 
-### Overview
-This project analyzes regional socio-economic indicators of Uzbekistan using official data from Stat.uz.  
-The goal is to identify regional disparities, income segmentation, and key economic drivers using SQL.
+## 🛠️ Skills & Tools
 
-### Data Source
-- Official statistics portal: Stat.uz
-- Coverage: Regions of Uzbekistan
-- Indicators: income per capita, industry, business activity, agriculture, employment (and others)
+| Category | Tools |
+|----------|-------|
+| **Query & Database** | SQL (PostgreSQL, MySQL) · CTEs · Window Functions |
+| **Visualization** | Power BI · Excel Charts |
+| **Programming** | Python (Pandas, Matplotlib, Seaborn) · Jupyter Notebook |
+| **Analytics** | KPI Analysis · Data Cleaning · Customer Segmentation · Financial Reporting |
 
-### Tools & Skills
-- SQL (CTE, Window Functions, Aggregations)
-- Data Cleaning & Validation
-- Analytical Thinking
-- Business-oriented insights
+---
 
-### Project Structure
-- `/sql` – SQL scripts for analysis
-- `/insights` – Key findings and conclusions
-- `/data_dictionary` – Description of tables and fields
-  
-### Status
-🚧 In progress
+---
 
-## Business Impact
+## 📁 Projects
 
-- Supports data-driven regional development decisions
-- Identifies income inequality gaps
-- Highlights sector-based economic drivers
-- Provides dashboard-based monitoring for performance tracking
+### 1. 🗺️ Regional Economic Analysis of Uzbekistan
+> **SQL · Python · Power BI** | Data: Stat.uz | 14 regions × 15 years (2010–2024)
 
-## Future Improvements (Roadmap)
+Regional income disparities, sector structure, and economic growth drivers across Uzbekistan's regions.
 
-- Add year-over-year income growth analysis
-- Build inequality index (Gini-style proxy)
-- Introduce sector-weighted economic strength score
-- Implement automated data refresh pipeline
-- Deploy dashboard to cloud environment
+| Highlight | Result |
+|-----------|--------|
+| Income gap (2024) | Toshkent sh. **6.1x** higher than Qoraqalpog'iston |
+| Strongest income driver | Investment per capita (r = **0.97**) |
+| Fastest growing sector | Construction (**+8.4x**, 2010–2024) |
+| National income growth | 2.19 → 38.60 mln UZS (**+17.6x**) |
 
-This project is designed as an evolving analytical framework rather than a static report.
+📂 [`projects/regional-uzbekistan-analysis/`](projects/regional-uzbekistan-analysis/) | **Status: ✅ Completed**
+
+---
+
+### 2. 🛒 Superstore Sales Analysis
+> **Python · Pandas · Matplotlib · Seaborn · Power BI** | Data: Kaggle | ~10,000 orders (2014–2017)
+
+End-to-end US retail sales analysis covering profitability, discounting impact, regional performance, and customer segmentation.
+
+| Highlight | Result |
+|-----------|--------|
+| Total Sales | **$2,297,201** |
+| Total Profit | **$286,397** (avg margin 12.5%) |
+| Worst sub-category | Tables: **−$17,725 loss** |
+| Key finding | Discounts > 20% → **always unprofitable** |
+
+📂 [`projects/superstore-sales-analysis/`](projects/superstore-sales-analysis/) | **Status: ✅ Completed**
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Add year-over-year income growth analysis (Uzbekistan)
+- [ ] Build regional inequality index (Gini-style proxy)
+- [ ] Deploy Power BI dashboard to cloud environment
+- [ ] Add HR / Employee KPI Tracking project
+- [ ] Add Financial Reporting & Accounting Analytics project
 
