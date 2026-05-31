@@ -3,27 +3,46 @@
 ## Overview
 
 This dashboard visualizes the results of the **Regional Economic Analysis of Uzbekistan** project.
-It is built on top of the SQL analysis and Python-cleaned data (source: **Stat.uz**), covering **14 regions × 15 years (2010–2024)**.
+It is built on top of SQL analytical queries and Python-cleaned data (source: **Stat.uz**), covering **14 regions × 15 years (2010–2024)**.
 
 The dashboard is designed for **policy analysts, regional managers, and business intelligence professionals** who need a quick, visual overview of regional economic performance.
 
+📁 **Dashboard file:** [`uzbekistan stat uz.pbix`](./uzbekistan%20stat%20uz.pbix)
+
 ---
 
-## Dashboard Pages
+## 📊 Key Metrics at a Glance
 
-### 📄 Page 1 — Income Overview
+| KPI | Value (2024) |
+|-----|-------------|
+| 🏆 National avg income pc | **38.60 mln UZS** |
+| 🔝 Highest region | **Toshkent sh. — 60.59 mln UZS** |
+| 🔻 Lowest region | **Qoraqalpog'iston — 9.87 mln UZS** |
+| ⚖️ Income gap ratio | **6.1x** |
+| 📉 Absolute gap | **50.72 mln UZS** |
+| 💹 Strongest income driver | **Investment per capita (r = 0.97)** |
+| 📉 Weakest driver | **Employment rate (r = 0.31)** |
+| 🏗️ Fastest growing sector | **Construction (+8.4x, 2010–2024)** |
+
+---
+
+## 📄 Dashboard Pages
+
+### Page 1 — Income Overview
 **Purpose:** Snapshot of income per capita across all regions
 
 | Visual | Type | Description |
 |--------|------|-------------|
 | Income by Region (2024) | Bar Chart | Ranked income per capita — Toshkent sh. (60.59) vs Qoraqalpog'iston (9.87 mln UZS) |
 | Income Trend (2010–2024) | Line Chart | National avg grew from 2.19 → 38.60 mln UZS (~17.6x) |
-| Region Segmentation | Map / Matrix | Q1–Q4 income quartile classification |
+| Region Segmentation | Matrix | Q1–Q4 income quartile classification |
 | KPI Cards | Card Visuals | National avg, top region, bottom region, Q4/Q1 ratio |
+
+> 📸 Screenshot: [`screenshots/page1_income_overview.png`](./screenshots/page1_income_overview.png)
 
 ---
 
-### 📄 Page 2 — Income Gap Analysis
+### Page 2 — Income Gap Analysis
 **Purpose:** Show how regional inequality has evolved over time
 
 | Visual | Type | Description |
@@ -33,9 +52,11 @@ The dashboard is designed for **policy analysts, regional managers, and business
 | Top vs Bottom | Clustered Bar | Toshkent sh. vs Qoraqalpog'iston side-by-side each year |
 | Inequality Heatmap | Matrix | Regions × Years — income_pc color coded |
 
+> 📸 Screenshot: [`screenshots/page2_income_gap.png`](./screenshots/page2_income_gap.png)
+
 ---
 
-### 📄 Page 3 — Sector Structure
+### Page 3 — Sector Structure
 **Purpose:** Understand which sectors dominate each region
 
 | Visual | Type | Description |
@@ -45,9 +66,11 @@ The dashboard is designed for **policy analysts, regional managers, and business
 | Region Type Matrix | Table | Urban / Mixed / Agricultural / Trade-oriented classification |
 | Sector vs Income Scatter | Scatter Plot | Agriculture dominance vs income_pc — weak correlation visible |
 
+> 📸 Screenshot: [`screenshots/page3_sector_structure.png`](./screenshots/page3_sector_structure.png)
+
 ---
 
-### 📄 Page 4 — Economic Drivers
+### Page 4 — Economic Drivers
 **Purpose:** Show which factors are most correlated with income growth
 
 | Visual | Type | Description |
@@ -57,24 +80,11 @@ The dashboard is designed for **policy analysts, regional managers, and business
 | GRP per Capita by Region | Horizontal Bar | Ranked by GRP pc — mirrors income ranking closely |
 | Driver Ranking Card | KPI Table | Top driver: Investment per capita → strongest income predictor |
 
----
-
-## Key Metrics Displayed
-
-| KPI | Value (2024) |
-|-----|--------------|
-| National avg income pc | 38.60 mln UZS |
-| Highest region | Toshkent sh. — 60.59 mln UZS |
-| Lowest region | Qoraqalpog'iston — 9.87 mln UZS |
-| Income gap ratio | 6.1x |
-| Absolute gap | 50.72 mln UZS |
-| Strongest income driver | Investment per capita (r = 0.97) |
-| Weakest driver | Employment rate (r = 0.31) |
-| Fastest growing sector | Construction (+8.4x, 2010–2024) |
+> 📸 Screenshot: [`screenshots/page4_economic_drivers.png`](./screenshots/page4_economic_drivers.png)
 
 ---
 
-## Filters & Slicers
+## 🎛️ Filters & Slicers
 
 | Slicer | Options |
 |--------|---------|
@@ -85,42 +95,65 @@ The dashboard is designed for **policy analysts, regional managers, and business
 
 ---
 
-## Data Source
+## 🗄️ Data Source
 
 | Field | Detail |
 |-------|--------|
-| Source | Stat.uz — official statistics portal of Uzbekistan |
+| Source | [Stat.uz](https://stat.uz) — official statistics portal of Uzbekistan |
 | Coverage | 14 regions, 2010–2024 |
 | Refresh | Manual (annual data release) |
 | Preparation | Python (Pandas) → cleaned Gold layer → Power BI |
 
 ---
 
-## How to Use
+## 🚀 How to Use
 
-1. Open the `.pbix` file in **Power BI Desktop** (version 2.0+)
-2. Use the **Year slicer** to filter a specific period
-3. Use the **Region slicer** to drill into a specific region
-4. **Page 4 (Drivers)** is best used without region filter — shows full correlation across all regions
-5. Screenshots of each page are provided below for quick review
+1. Download [`uzbekistan stat uz.pbix`](./uzbekistan%20stat%20uz.pbix)
+2. Open it in **Power BI Desktop** (version 2.0+)
+3. Use the **Year slicer** to filter a specific period
+4. Use the **Region slicer** to drill into a specific region
+5. **Page 4 (Drivers)** is best used without region filter — shows full correlation across all regions
 
 ---
 
-## Screenshots
+## 🖼️ Screenshots
 
-> 📌 *Dashboard screenshots will be added after final Power BI file export.*
+> 📌 *Screenshots will be added after dashboard export from Power BI Desktop.*
 > 
-> Planned visuals:
-> - `page1_income_overview.png`
-> - `page2_income_gap.png`
-> - `page3_sector_structure.png`
-> - `page4_economic_drivers.png`
+> To add screenshots:
+> 1. Open each page in Power BI Desktop
+> 2. Go to **File → Export → Export to PNG** (or use Snipping Tool)
+> 3. Save files to `screenshots/` folder with the names below:
+
+| Page | File |
+|------|------|
+| Page 1 — Income Overview | `screenshots/page1_income_overview.png` |
+| Page 2 — Income Gap | `screenshots/page2_income_gap.png` |
+| Page 3 — Sector Structure | `screenshots/page3_sector_structure.png` |
+| Page 4 — Economic Drivers | `screenshots/page4_economic_drivers.png` |
 
 ---
 
-## Tools Used
+## 🛠️ Tools Used
 
-- **Power BI Desktop** — dashboard development
-- **DAX** — calculated measures (gap ratio, YoY growth, quartile logic)
-- **Python (Pandas)** — data cleaning and Gold layer preparation
-- **SQL (PostgreSQL)** — analytical queries (segmentation, correlation, gap analysis)
+| Tool | Purpose |
+|------|---------|
+| **Power BI Desktop** | Dashboard development & visualization |
+| **DAX** | Calculated measures (gap ratio, YoY growth, quartile logic) |
+| **Python (Pandas)** | Data cleaning and Gold layer preparation |
+| **SQL (PostgreSQL)** | Analytical queries (segmentation, correlation, gap analysis) |
+
+---
+
+## 🔗 Related Files
+
+| File | Description |
+|------|-------------|
+| [`../sql/01_income_segmentation.sql`](../sql/01_income_segmentation.sql) | SQL — Income quartile segmentation |
+| [`../sql/02_income_gap_analysis.sql`](../sql/02_income_gap_analysis.sql) | SQL — Gap trend analysis |
+| [`../sql/03_sector_structure_analysis.sql`](../sql/03_sector_structure_analysis.sql) | SQL — Sector share by region |
+| [`../sql/04_drivers_correlation.sql`](../sql/04_drivers_correlation.sql) | SQL — Correlation with income |
+| [`../insights/01_income_segmentation.md`](../insights/01_income_segmentation.md) | Insight — Segmentation findings |
+| [`../insights/02_income_gap_analysis.md`](../insights/02_income_gap_analysis.md) | Insight — Gap analysis findings |
+| [`../insights/03_sector_structure_analysis.md`](../insights/03_sector_structure_analysis.md) | Insight — Sector structure findings |
+| [`../insights/04_drivers_correlation.md`](../insights/04_drivers_correlation.md) | Insight — Driver correlation findings |
