@@ -41,21 +41,32 @@ End-to-end regional economic analysis covering income disparities, sector struct
 
 #### 📂 Project Structure
 
-| Folder | Contents |
-|--------|----------|
-| [`projects/regional-uzbekistan-analysis/sql/`](projects/regional-uzbekistan-analysis/sql/) | 4 SQL analytical queries |
-| [`projects/regional-uzbekistan-analysis/insights/`](projects/regional-uzbekistan-analysis/insights/) | 4 written insight reports |
-| [`projects/regional-uzbekistan-analysis/power_bi/`](projects/regional-uzbekistan-analysis/power_bi/) | Power BI dashboard (`.pbix`) |
-| [`python/stat_uz_analysis/`](python/stat_uz_analysis/) | Python data cleaning & EDA |
+```
+projects/regional-uzbekistan-analysis/
+├── sql/        ← 4 SQL analytical queries
+├── insights/   ← 4 written insight reports
+├── power_bi/   ← Power BI dashboard (.pbix)
+└── python/     ← Data cleaning & EDA (Jupyter + DataCleaner)
+```
+
+#### 🐍 Python — Data Pipeline
+
+| File | Description |
+|------|-------------|
+| [`python/cleaner.py`](projects/regional-uzbekistan-analysis/python/cleaner.py) | DataCleaner class — clean, split, segment, summarize |
+| [`python/stat_uz_analysis.ipynb`](projects/regional-uzbekistan-analysis/python/stat_uz_analysis.ipynb) | EDA Notebook — Bronze → Silver → Gold pipeline |
+| [`python/data.xlsx`](projects/regional-uzbekistan-analysis/python/data.xlsx) | Raw source data (Stat.uz, multi-sheet Excel) |
+
+**Data pipeline:** Raw Excel → Bronze (copy) → Silver (merge sheets) → Gold (clean + segment)
 
 #### 🗂️ SQL Analyses
 
 | # | File | Description |
 |---|------|-------------|
-| 1 | [`01_income_segmentation.sql`](projects/regional-uzbekistan-analysis/sql/01_income_segmentation.sql) | Quartile segmentation of 14 regions |
-| 2 | [`02_income_gap_analysis.sql`](projects/regional-uzbekistan-analysis/sql/02_income_gap_analysis.sql) | Top vs bottom region gap trend |
-| 3 | [`03_sector_structure_analysis.sql`](projects/regional-uzbekistan-analysis/sql/03_sector_structure_analysis.sql) | Sector share by region |
-| 4 | [`04_drivers_correlation.sql`](projects/regional-uzbekistan-analysis/sql/04_drivers_correlation.sql) | Income driver correlation |
+| 1 | [`sql/01_income_segmentation.sql`](projects/regional-uzbekistan-analysis/sql/01_income_segmentation.sql) | Quartile segmentation of 14 regions |
+| 2 | [`sql/02_income_gap_analysis.sql`](projects/regional-uzbekistan-analysis/sql/02_income_gap_analysis.sql) | Top vs bottom region gap trend |
+| 3 | [`sql/03_sector_structure_analysis.sql`](projects/regional-uzbekistan-analysis/sql/03_sector_structure_analysis.sql) | Sector share by region |
+| 4 | [`sql/04_drivers_correlation.sql`](projects/regional-uzbekistan-analysis/sql/04_drivers_correlation.sql) | Income driver correlation |
 
 #### 📊 Power BI Dashboard
 
