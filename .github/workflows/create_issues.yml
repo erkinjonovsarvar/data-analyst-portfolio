@@ -1,0 +1,184 @@
+name: Create Portfolio Issues
+on:
+  push:
+    branches: [create-issues]
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Issues
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const issues = [
+              {
+                title: "🗂️ Set up project folder structure for Regional Uzbekistan Analysis",
+                body: `## 📋 Tavsif\nO'zbekiston hududiy iqtisodiy tahlili uchun to'liq loyiha tuzilmasini yaratish.\n\n## ✅ Bajarilgan\n- \`sql/\` papkasi yaratildi\n- \`python/\` papkasi yaratildi\n- \`power_bi/\` papkasi yaratildi\n- \`insights/\` papkasi yaratildi\n- Har bir papka uchun \`README.md\` yozildi\n- Asosiy \`README.md\` ga loyiha qo'shildi\n\n## 🏷️ Loyiha\nRegional Economic Analysis of Uzbekistan`,
+                labels: ["documentation"],
+                close: true
+              },
+              {
+                title: "🧹 Build Python DataCleaner class and Bronze→Silver→Gold pipeline",
+                body: `## 📋 Tavsif\nStat.uz ma'lumotlarini tozalash va qayta ishlash uchun Python pipeline yaratish.\n\n## ✅ Bajarilgan\n- \`DataCleaner\` klassi yaratildi (\`cleaner.py\`)\n- \`clean()\`, \`column_split()\`, \`add_income_segment()\`, \`summary()\` metodlari yozildi\n- Bronze → Silver → Gold pipeline Jupyter Notebook'da amalga oshirildi\n- 14 hudud × 15 yil (2010–2024) ma'lumotlar tozalandi\n- \`income_segment\` (Q1–Q4) ustuni qo'shildi\n\n## 🔗 Fayllar\n- \`python/cleaner.py\`\n- \`python/stat_uz_analysis.ipynb\`\n- \`python/data.xlsx\``,
+                labels: ["enhancement"],
+                close: true
+              },
+              {
+                title: "🔍 SQL: Income Segmentation — quartile analysis of 14 regions",
+                body: `## 📋 Tavsif\nO'zbekistonning 14 ta hududini daromad darajasi bo'yicha Q1–Q4 kvartillariga ajratish.\n\n## ✅ Bajarilgan\n- \`NTILE(4)\` window function yordamida segmentatsiya amalga oshirildi\n- Natija: Toshkent sh. (Q4) — Qoraqalpog'iston (Q1)\n- Q4 o'rtacha daromadi Q1 dan **5.4x yuqori** ekanligi aniqlandi\n- Insight report yozildi\n\n## 🔗 Fayllar\n- \`sql/01_income_segmentation.sql\`\n- \`insights/01_income_segmentation.md\``,
+                labels: ["enhancement"],
+                close: true
+              },
+              {
+                title: "📊 SQL: Income Gap Analysis — top vs bottom region trend (2010–2024)",
+                body: `## 📋 Tavsif\nEng yuqori va eng past daromadli hududlar o'rtasidagi farqni o'lchash va dinamikasini tahlil qilish.\n\n## ✅ Bajarilgan\n- \`ROW_NUMBER()\` orqali top va bottom hududlar aniqlandi\n- Absolyut va nisbiy farq hisoblandi\n- 2010–2024 yillar uchun trend tahlili bajarildi\n- Natija: gap 2.8x (2010) → **6.1x (2024)**\n- Insight report yozildi\n\n## 🔗 Fayllar\n- \`sql/02_income_gap_analysis.sql\`\n- \`insights/02_income_gap_analysis.md\``,
+                labels: ["enhancement"],
+                close: true
+              },
+              {
+                title: "🏗️ SQL: Sector Structure Analysis — sector share by region",
+                body: `## 📋 Tavsif\nHar bir hududda qaysi iqtisodiy sektorlar ustunlik qilishini aniqlash.\n\n## ✅ Bajarilgan\n- \`UNION ALL\` orqali 3 sektor birlashtirildi\n- \`SUM() OVER (PARTITION BY region)\` bilan har bir sektordagi ulush (%) hisoblandi\n- Qurilish eng tez o'suvchi sektor ekanligi aniqlandi (+8.4x)\n- Hudud turlari: Urban / Mixed / Agricultural / Trade-oriented\n- Insight report yozildi\n\n## 🔗 Fayllar\n- \`sql/03_sector_structure_analysis.sql\`\n- \`insights/03_sector_structure_analysis.md\``,
+                labels: ["enhancement"],
+                close: true
+              },
+              {
+                title: "📈 SQL: Income Drivers Correlation — Pearson correlation analysis",
+                body: `## 📋 Tavsif\nDaromad per capita bilan bog'liq eng kuchli iqtisodiy omillarni aniqlash.\n\n## ✅ Bajarilgan\n- 5 ta ko'rsatkich bo'yicha Pearson korrelyatsiyasi hisoblandi\n- **Investitsiyalar** eng kuchli omil ekanligi aniqlandi (r = **0.97**)\n- Qishloq xo'jaligi zaif korrelyatsiyaga ega (r = 0.43)\n- Policy implication xulosalar yozildi\n- Insight report yozildi\n\n## 🔗 Fayllar\n- \`sql/04_drivers_correlation.sql\`\n- \`insights/04_drivers_correlation.md\``,
+                labels: ["enhancement"],
+                close: true
+              },
+              {
+                title: "📊 Power BI: Build 4-page interactive dashboard (Uzbekistan regional data)",
+                body: `## 📋 Tavsif\nStat.uz ma'lumotlari asosida 4 sahifali interaktiv Power BI dashboard yaratish.\n\n## ✅ Bajarilgan\n- **Page 1** — Income Overview: ranked bar chart, trend line, KPI cards\n- **Page 2** — Income Gap: gap trend, ratio trend, heatmap\n- **Page 3** — Sector Structure: stacked bar, area chart, region type matrix\n- **Page 4** — Economic Drivers: correlation chart, scatter plots, driver ranking\n- Yil va hudud bo'yicha slicerlar qo'shildi\n- \`.pbix\` fayli saqlandi\n\n## 🔗 Fayllar\n- \`power_bi/uzbekistan stat uz.pbix\`\n- \`power_bi/README.md\``,
+                labels: ["enhancement"],
+                close: true
+              },
+              {
+                title: "🛒 Superstore Sales: EDA and profitability analysis (Python)",
+                body: `## 📋 Tavsif\nUS retail superstore ma'lumotlari asosida to'liq savdo va foyda tahlili bajarish.\n\n## ✅ Bajarilgan\n- ~10,000 buyurtma, 2014–2017 yillar tahlil qilindi\n- Chegirma vs foyda korrelyatsiyasi aniqlandi (r = −0.22)\n- Kategoriya va sub-kategoriya bo'yicha foyda tahlili\n- Region va segment bo'yicha performance tahlili\n- Vaqt qatori tahlili (YoY o'sish)\n- **Star Schema** (Power BI uchun) qurildi\n\n## 💡 Asosiy natijalar\n- Total Sales: **$2,297,201** | Profit: **$286,397**\n- 20% dan ortiq chegirma har doim zararli\n- Tables sub-kategoriyasi: **−$17,725 zarar**\n\n## 🔗 Fayllar\n- \`projects/superstore-sales-analysis/Superstore_Sales_Final_Portfolio.ipynb\``,
+                labels: ["enhancement"],
+                close: true
+              },
+              {
+                title: "📝 Write README for all projects and main portfolio README",
+                body: `## 📋 Tavsif\nBarcha loyihalar uchun professional README fayllar yozish.\n\n## ✅ Bajarilgan\n- Asosiy \`README.md\` — About Me, Skills & Tools, Projects overview, Roadmap\n- \`regional-uzbekistan-analysis/sql/README.md\`\n- \`regional-uzbekistan-analysis/python/README.md\`\n- \`regional-uzbekistan-analysis/power_bi/README.md\`\n- \`superstore-sales-analysis/README.md\``,
+                labels: ["documentation"],
+                close: true
+              },
+              {
+                title: "📐 Power BI: Add DAX measures and dashboard design guide",
+                body: `## 📋 Tavsif\nPower BI dashboard uchun professional DAX measures va dizayn qo'llanmasini yaratish.\n\n## 🔄 Jarayonda (In Progress)\n- DAX measures fayli yozilmoqda (40+ formula)\n- Dashboard design guide tayyorlanmoqda\n- 4 sahifa uchun vizual layout belgilanmoqda\n\n## Kutilayotgan natija\n- \`power_bi/dax_measures.md\`\n- \`power_bi/dashboard_design_guide.md\`\n\n## PR\n#3 — ochiq`,
+                labels: ["enhancement"],
+                close: false
+              },
+              {
+                title: "🖼️ Add Power BI dashboard screenshots to /screenshots folder",
+                body: `## 📋 Tavsif\nPower BI dashboard sahifalarining screenshot rasmlarini qo'shish.\n\n## Bajarilishi kerak\n- Power BI Desktop'da har sahifani ochish\n- PNG formatida export qilish\n- \`power_bi/screenshots/\` papkasiga saqlash\n\n## Kerakli fayllar\n- \`page1_income_overview.png\`\n- \`page2_income_gap.png\`\n- \`page3_sector_structure.png\`\n- \`page4_economic_drivers.png\``,
+                labels: ["documentation"],
+                close: false
+              },
+              {
+                title: "📊 Add year-over-year income growth rate analysis (Uzbekistan)",
+                body: `## 📋 Tavsif\nHar bir hudud uchun yillik daromad o'sish sur'atini (YoY %) tahlil qilish.\n\n## Bajarilishi kerak\n- SQL query yozish: LAG() window function bilan YoY growth hisoblash\n- Python notebook'ga YoY o'sish vizualizatsiyasi qo'shish\n- Power BI'ga YoY growth chart qo'shish\n- Insight report yozish\n\n## Kutilayotgan natija\n- \`sql/05_yoy_growth_analysis.sql\`\n- \`insights/05_yoy_growth.md\``,
+                labels: ["enhancement"],
+                close: false
+              },
+              {
+                title: "📉 Build regional inequality index (Gini-style proxy)",
+                body: `## 📋 Tavsif\nO'zbekiston hududlari o'rtasidagi tengsizlikni o'lchovchi Gini-style indeks yaratish.\n\n## Bajarilishi kerak\n- Python'da Gini koeffitsienti hisoblash\n- Har yil uchun indeks trend tahlili\n- Natijani Power BI'ga qo'shish\n\n## Kutilayotgan natija\n- \`python/gini_analysis.py\`\n- \`insights/06_inequality_index.md\``,
+                labels: ["enhancement"],
+                close: false
+              },
+              {
+                title: "☁️ Deploy Power BI dashboard to Power BI Service (cloud)",
+                body: `## 📋 Tavsif\nPower BI dashboard'ni cloud'ga (Power BI Service) publish qilish va public link olish.\n\n## Bajarilishi kerak\n- Power BI Service'ga login qilish\n- .pbix faylni publish qilish\n- Public embed link olish\n- README'ga link qo'shish`,
+                labels: ["enhancement"],
+                close: false
+              },
+              {
+                title: "👥 Add HR / Employee KPI Tracking new project",
+                body: `## 📋 Tavsif\nYangi loyiha: HR va xodimlar KPI tracking tahlili.\n\n## Rejalangan tarkib\n- SQL: Xodimlar samaradorligi tahlili\n- Python: EDA va vizualizatsiya\n- Power BI: HR dashboard\n- Insight reports\n\n## Kutilayotgan papka\n\`projects/hr-kpi-tracking/\``,
+                labels: ["new-project"],
+                close: false
+              },
+              {
+                title: "💰 Add Financial Reporting & Accounting Analytics project",
+                body: `## 📋 Tavsif\nYangi loyiha: Moliyaviy hisobot va buxgalteriya analitikasi.\n\n## Rejalangan tarkib\n- P&L statement tahlili\n- Budget vs Actual tahlili\n- SQL: finansial so'rovlar\n- Power BI: moliyaviy dashboard\n\n## Kutilayotgan papka\n\`projects/financial-reporting/\``,
+                labels: ["new-project"],
+                close: false
+              },
+              {
+                title: "🛒 Add Power BI dashboard for Superstore Sales Analysis",
+                body: `## 📋 Tavsif\nSuperstore Sales Analysis uchun Power BI dashboard yaratish.\n\n## Bajarilishi kerak\n- Python notebook'dagi Star Schema asosida Power BI model qurish\n- Foyda, savdo, region, kategoriya vizualizatsiyalari\n- Discount impact dashboard\n- .pbix faylni loyihaga qo'shish\n\n## Kutilayotgan fayl\n\`projects/superstore-sales-analysis/superstore_dashboard.pbix\``,
+                labels: ["enhancement"],
+                close: false
+              }
+            ];
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const createdIssues = [];
+
+            // First, create labels if they don't exist
+            const labelsToCreate = ["documentation", "enhancement", "new-project"];
+            const labelColors = {
+              "documentation": "0075ca",
+              "enhancement": "a2eeef",
+              "new-project": "e4e669"
+            };
+
+            for (const labelName of labelsToCreate) {
+              try {
+                await github.rest.issues.createLabel({
+                  owner,
+                  repo,
+                  name: labelName,
+                  color: labelColors[labelName]
+                });
+                console.log(`Created label: ${labelName}`);
+              } catch (e) {
+                console.log(`Label '${labelName}' already exists or error: ${e.message}`);
+              }
+            }
+
+            // Create issues
+            for (const issue of issues) {
+              try {
+                const created = await github.rest.issues.create({
+                  owner,
+                  repo,
+                  title: issue.title,
+                  body: issue.body,
+                  labels: issue.labels
+                });
+                console.log(`Created issue #${created.data.number}: ${issue.title}`);
+                createdIssues.push({ number: created.data.number, title: issue.title, close: issue.close });
+
+                // Close if needed
+                if (issue.close) {
+                  await github.rest.issues.update({
+                    owner,
+                    repo,
+                    issue_number: created.data.number,
+                    state: 'closed'
+                  });
+                  console.log(`Closed issue #${created.data.number}`);
+                }
+
+                // Small delay to avoid rate limiting
+                await new Promise(r => setTimeout(r, 500));
+              } catch (e) {
+                console.error(`Error creating issue "${issue.title}": ${e.message}`);
+              }
+            }
+
+            console.log('\n=== Summary ===');
+            for (const i of createdIssues) {
+              console.log(`#${i.number} [${i.close ? 'CLOSED' : 'OPEN'}]: ${i.title}`);
+            }
