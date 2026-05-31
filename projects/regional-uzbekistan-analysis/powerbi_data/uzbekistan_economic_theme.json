@@ -1,0 +1,23 @@
+{
+  "name": "Uzbekistan Economic Dashboard",
+  "dataColors": ["#1A5276","#2E86C1","#85C1E9","#D6EAF8","#27AE60","#E67E22","#C0392B","#6C3483"],
+  "background":   "#F4F6F7",
+  "foreground":   "#2C3E50",
+  "tableAccent":  "#2E86C1",
+  "visualStyles": {
+    "*":          { "*": { "fontFamily": [{"value":"Segoe UI"}], "fontSize": [{"value":10}] } },
+    "card":       { "*": { "dataLabelFontSize":[{"value":28}], "categoryLabelFontSize":[{"value":10}],
+                            "outline":[{"value":"BottomOnly"}], "outlineColor":[{"solid":{"color":"#2E86C1"}}],
+                            "outlineWeight":[{"value":2}] } },
+    "barChart":   { "*": { "gridlineColor":[{"solid":{"color":"#F0F0F0"}}], "labelFontSize":[{"value":9}] } },
+    "lineChart":  { "*": { "lineWidth":[{"value":2}], "markerEnabled":[{"value":true}], "markerSize":[{"value":6}] } },
+    "scatterChart":{ "*": { "markerSize":[{"value":12}] } },
+    "slicer":     { "*": { "outlineColor":[{"solid":{"color":"#2E86C1"}}], "outlineWeight":[{"value":1}] } }
+  },
+  "textClasses": {
+    "callout":    { "fontFace":"Segoe UI",      "color":"#1A5276", "size":28 },
+    "header":     { "fontFace":"Segoe UI Semibold","color":"#FFFFFF","size":18 },
+    "label":      { "fontFace":"Segoe UI",      "color":"#7F8C8D", "size":10 },
+    "title":      { "fontFace":"Segoe UI Bold", "color":"#2C3E50", "size":13 }
+  }
+}

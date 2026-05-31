@@ -1,0 +1,16 @@
+region_id,region,region_uz,region_type,region_zone,region_order,income_tier,is_capital,latitude,longitude
+1,Toshkent sh.,Toshkent shahri,Urban/Industrial,Markaziy,1,Tier 1 — Yuqori,Poytaxt,41.2995,69.2401
+2,Navoiy,Navoiy viloyati,Urban/Industrial,G'arbiy,2,Tier 1 — Yuqori,Viloyat,40.0939,65.3792
+3,Toshkent vil.,Toshkent viloyati,Mixed,Markaziy,3,Tier 2 — O'rta-yuqori,Viloyat,41.1123,69.8597
+4,Buxoro,Buxoro viloyati,Mixed,G'arbiy,4,Tier 2 — O'rta-yuqori,Viloyat,39.7680,64.4219
+5,Qashqadaryo,Qashqadaryo viloyati,Mixed,Janubiy,5,Tier 2 — O'rta-yuqori,Viloyat,38.8600,65.7900
+6,Jizzax,Jizzax viloyati,Mixed,Markaziy,6,Tier 3 — O'rta,Viloyat,40.1158,67.8422
+7,Samarqand,Samarqand viloyati,Mixed,Janubiy-Markaziy,7,Tier 3 — O'rta,Viloyat,39.6542,66.9597
+8,Sirdaryo,Sirdaryo viloyati,Agricultural,Markaziy,8,Tier 3 — O'rta,Viloyat,40.8389,68.6624
+9,Farg'ona,Farg'ona viloyati,Trade-oriented,Sharqiy,9,Tier 3 — O'rta,Viloyat,40.3842,71.7843
+10,Andijon,Andijon viloyati,Trade-oriented,Sharqiy,10,Tier 4 — Past,Viloyat,40.7821,72.3442
+11,Namangan,Namangan viloyati,Trade-oriented,Sharqiy,11,Tier 4 — Past,Viloyat,41.0011,71.6727
+12,Xorazm,Xorazm viloyati,Agricultural,G'arbiy,12,Tier 4 — Past,Viloyat,41.3500,60.3700
+13,Surxondaryo,Surxondaryo viloyati,Agricultural,Janubiy,13,Tier 4 — Past,Viloyat,37.9289,67.5674
+14,Qoraqalpog'iston,Qoraqalpog'iston Respublikasi,Agricultural,G'arbiy,14,Tier 4 — Past,Viloyat,43.7333,59.6167
+15,O'zbekiston,O'zbekiston (milliy),National,Milliy,0,Milliy o'rtacha,Milliy,41.2995,64.5850

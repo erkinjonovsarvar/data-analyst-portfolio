@@ -1,0 +1,668 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "culture": "uz-UZ",
+    "dataAccessOptions": { "legacyRedirects": true, "returnErrorValuesAsNull": true },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "uz-UZ",
+
+    "tables": [
+      {
+        "name": "dim_calendar",
+        "columns": [
+          { "name": "year",         "dataType": "int64",   "sourceColumn": "year" },
+          { "name": "decade",       "dataType": "string",  "sourceColumn": "decade" },
+          { "name": "period_label", "dataType": "string",  "sourceColumn": "period_label" },
+          { "name": "period_order", "dataType": "int64",   "sourceColumn": "period_order" },
+          { "name": "is_reform_year","dataType": "int64",  "sourceColumn": "is_reform_year" },
+          { "name": "year_label",   "dataType": "string",  "sourceColumn": "year_label" }
+        ],
+        "partitions": [{
+          "name": "dim_calendar",
+          "mode": "import",
+          "source": {
+            "type": "m",
+            "expression": [
+              "let",
+              "  Source = Csv.Document(File.Contents(\"[YOUR_PATH]\\\\dim_calendar.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.None]),",
+              "  Header = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+              "  Typed  = Table.TransformColumnTypes(Header,{{\"year\",Int64.Type},{\"decade\",type text},{\"period_label\",type text},{\"period_order\",Int64.Type},{\"is_reform_year\",Int64.Type},{\"year_label\",type text}})",
+              "in Typed"
+            ]
+          }
+        }]
+      },
+
+      {
+        "name": "dim_regions",
+        "columns": [
+          { "name": "region_id",    "dataType": "int64",   "sourceColumn": "region_id" },
+          { "name": "region",       "dataType": "string",  "sourceColumn": "region" },
+          { "name": "region_uz",    "dataType": "string",  "sourceColumn": "region_uz" },
+          { "name": "region_type",  "dataType": "string",  "sourceColumn": "region_type" },
+          { "name": "region_zone",  "dataType": "string",  "sourceColumn": "region_zone" },
+          { "name": "region_order", "dataType": "int64",   "sourceColumn": "region_order", "isHidden": true },
+          { "name": "income_tier",  "dataType": "string",  "sourceColumn": "income_tier" },
+          { "name": "is_capital",   "dataType": "string",  "sourceColumn": "is_capital" },
+          { "name": "latitude",     "dataType": "double",  "sourceColumn": "latitude",
+            "dataCategory": "Latitude" },
+          { "name": "longitude",    "dataType": "double",  "sourceColumn": "longitude",
+            "dataCategory": "Longitude" }
+        ],
+        "partitions": [{
+          "name": "dim_regions",
+          "mode": "import",
+          "source": {
+            "type": "m",
+            "expression": [
+              "let",
+              "  Source = Csv.Document(File.Contents(\"[YOUR_PATH]\\\\dim_regions.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.None]),",
+              "  Header = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+              "  Typed  = Table.TransformColumnTypes(Header,{{\"region_id\",Int64.Type},{\"region\",type text},{\"region_uz\",type text},{\"region_type\",type text},{\"region_zone\",type text},{\"region_order\",Int64.Type},{\"income_tier\",type text},{\"is_capital\",type text},{\"latitude\",type number},{\"longitude\",type number}})",
+              "in Typed"
+            ]
+          }
+        }]
+      },
+
+      {
+        "name": "fact_income",
+        "columns": [
+          { "name": "region",               "dataType": "string", "sourceColumn": "region", "isHidden": true },
+          { "name": "year",                 "dataType": "int64",  "sourceColumn": "year",   "isHidden": true },
+          { "name": "income_pc",            "dataType": "double", "sourceColumn": "income_pc",
+            "formatString": "#,##0.00" },
+          { "name": "grp",                  "dataType": "double", "sourceColumn": "grp",
+            "formatString": "#,##0" },
+          { "name": "inv_fixed_capital_pc", "dataType": "double", "sourceColumn": "inv_fixed_capital_pc",
+            "formatString": "#,##0.00" }
+        ],
+        "partitions": [{
+          "name": "fact_income",
+          "mode": "import",
+          "source": {
+            "type": "m",
+            "expression": [
+              "let",
+              "  Source = Csv.Document(File.Contents(\"[YOUR_PATH]\\\\fact_income.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.None]),",
+              "  Header = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+              "  Typed  = Table.TransformColumnTypes(Header,{{\"region\",type text},{\"year\",Int64.Type},{\"income_pc\",type number},{\"grp\",type number},{\"inv_fixed_capital_pc\",type number}})",
+              "in Typed"
+            ]
+          }
+        }]
+      },
+
+      {
+        "name": "fact_economy",
+        "columns": [
+          { "name": "region",                 "dataType": "string", "sourceColumn": "region", "isHidden": true },
+          { "name": "year",                   "dataType": "int64",  "sourceColumn": "year",   "isHidden": true },
+          { "name": "construction",           "dataType": "double", "sourceColumn": "construction",           "formatString": "#,##0" },
+          { "name": "agriculture_output",     "dataType": "double", "sourceColumn": "agriculture_output",     "formatString": "#,##0" },
+          { "name": "retail_trade",           "dataType": "double", "sourceColumn": "retail_trade",           "formatString": "#,##0" },
+          { "name": "wholesale_trade",        "dataType": "double", "sourceColumn": "wholesale_trade",        "formatString": "#,##0" },
+          { "name": "foreign_trade_turnover", "dataType": "double", "sourceColumn": "foreign_trade_turnover", "formatString": "#,##0" }
+        ],
+        "partitions": [{
+          "name": "fact_economy",
+          "mode": "import",
+          "source": {
+            "type": "m",
+            "expression": [
+              "let",
+              "  Source = Csv.Document(File.Contents(\"[YOUR_PATH]\\\\fact_economy.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.None]),",
+              "  Header = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+              "  Typed  = Table.TransformColumnTypes(Header,{{\"region\",type text},{\"year\",Int64.Type},{\"construction\",type number},{\"agriculture_output\",type number},{\"retail_trade\",type number},{\"wholesale_trade\",type number},{\"foreign_trade_turnover\",type number}})",
+              "in Typed"
+            ]
+          }
+        }]
+      },
+
+      {
+        "name": "fact_demographics",
+        "columns": [
+          { "name": "region",                   "dataType": "string", "sourceColumn": "region",                   "isHidden": true },
+          { "name": "year",                     "dataType": "int64",  "sourceColumn": "year",                     "isHidden": true },
+          { "name": "population_permanent",     "dataType": "double", "sourceColumn": "population_permanent",     "formatString": "#,##0.0" },
+          { "name": "employed_thousand",        "dataType": "double", "sourceColumn": "employed_thousand",        "formatString": "#,##0.0" },
+          { "name": "unemployed_thousand",      "dataType": "double", "sourceColumn": "unemployed_thousand",      "formatString": "#,##0.0" },
+          { "name": "econ_active_thousand",     "dataType": "double", "sourceColumn": "econ_active_thousand",     "formatString": "#,##0.0" },
+          { "name": "births_total",             "dataType": "int64",  "sourceColumn": "births_total",             "formatString": "#,##0" },
+          { "name": "fact_deaths",              "dataType": "int64",  "sourceColumn": "fact_deaths",              "formatString": "#,##0" },
+          { "name": "active_enterprises_count", "dataType": "int64",  "sourceColumn": "active_enterprises_count", "formatString": "#,##0" }
+        ],
+        "partitions": [{
+          "name": "fact_demographics",
+          "mode": "import",
+          "source": {
+            "type": "m",
+            "expression": [
+              "let",
+              "  Source = Csv.Document(File.Contents(\"[YOUR_PATH]\\\\fact_demographics.csv\"),[Delimiter=\",\",Encoding=65001,QuoteStyle=QuoteStyle.None]),",
+              "  Header = Table.PromoteHeaders(Source,[PromoteAllScalars=true]),",
+              "  Typed  = Table.TransformColumnTypes(Header,{{\"region\",type text},{\"year\",Int64.Type},{\"population_permanent\",type number},{\"employed_thousand\",type number},{\"unemployed_thousand\",type number},{\"econ_active_thousand\",type number},{\"births_total\",Int64.Type},{\"fact_deaths\",Int64.Type},{\"active_enterprises_count\",Int64.Type}})",
+              "in Typed"
+            ]
+          }
+        }]
+      },
+
+      {
+        "name": "_Measures",
+        "isHidden": true,
+        "columns": [
+          { "name": "_placeholder", "dataType": "int64", "isHidden": true,
+            "sourceColumn": "_placeholder" }
+        ],
+        "partitions": [{
+          "name": "_Measures",
+          "mode": "import",
+          "source": {
+            "type": "m",
+            "expression": "let Source = #table({\"_placeholder\"},{}) in Source"
+          }
+        }],
+        "measures": [
+          {
+            "name": "Avg Income PC",
+            "displayFolder": "00_Base",
+            "formatString": "#,##0.00",
+            "expression": "AVERAGE(fact_income[income_pc])"
+          },
+          {
+            "name": "National Avg Income",
+            "displayFolder": "00_Base",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE(AVERAGE(fact_income[income_pc]), ALL(dim_regions), ALL(dim_calendar))"
+          },
+          {
+            "name": "Income 2024",
+            "displayFolder": "00_Base",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE(AVERAGE(fact_income[income_pc]), dim_calendar[year] = 2024)"
+          },
+          {
+            "name": "Income 2010",
+            "displayFolder": "00_Base",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE(AVERAGE(fact_income[income_pc]), dim_calendar[year] = 2010)"
+          },
+          {
+            "name": "Selected Year Income",
+            "displayFolder": "00_Base",
+            "formatString": "#,##0.00",
+            "expression": [
+              "VAR sel_year = SELECTEDVALUE(dim_calendar[year], 2024)",
+              "RETURN CALCULATE(AVERAGE(fact_income[income_pc]), dim_calendar[year] = sel_year)"
+            ]
+          },
+
+          {
+            "name": "Top Region Income",
+            "displayFolder": "01_Income_Overview",
+            "formatString": "#,##0.00",
+            "expression": "MAXX(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])))"
+          },
+          {
+            "name": "Bottom Region Income",
+            "displayFolder": "01_Income_Overview",
+            "formatString": "#,##0.00",
+            "expression": [
+              "VAR tbl = FILTER(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])) > 0)",
+              "RETURN MINX(tbl, CALCULATE(AVERAGE(fact_income[income_pc])))"
+            ]
+          },
+          {
+            "name": "Top Region Name",
+            "displayFolder": "01_Income_Overview",
+            "expression": [
+              "VAR top_val = [Top Region Income]",
+              "RETURN MAXX(FILTER(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])) = top_val), dim_regions[region])"
+            ]
+          },
+          {
+            "name": "Bottom Region Name",
+            "displayFolder": "01_Income_Overview",
+            "expression": [
+              "VAR bot_val = [Bottom Region Income]",
+              "RETURN MAXX(FILTER(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])) = bot_val), dim_regions[region])"
+            ]
+          },
+          {
+            "name": "Region Income Rank",
+            "displayFolder": "01_Income_Overview",
+            "formatString": "0",
+            "expression": [
+              "IF(HASONEVALUE(dim_regions[region]),",
+              "  RANKX(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])), , DESC, DENSE))"
+            ]
+          },
+          {
+            "name": "YoY Growth Pct",
+            "displayFolder": "01_Income_Overview",
+            "formatString": "0.0%",
+            "expression": [
+              "VAR cur_year = SELECTEDVALUE(dim_calendar[year])",
+              "VAR cur_val  = CALCULATE(AVERAGE(fact_income[income_pc]), dim_calendar[year] = cur_year)",
+              "VAR prev_val = CALCULATE(AVERAGE(fact_income[income_pc]), dim_calendar[year] = cur_year - 1)",
+              "RETURN IF(NOT ISBLANK(prev_val) && prev_val <> 0, DIVIDE(cur_val - prev_val, prev_val), BLANK())"
+            ]
+          },
+          {
+            "name": "Growth Multiplier",
+            "displayFolder": "01_Income_Overview",
+            "formatString": "0.0\"x\"",
+            "expression": [
+              "VAR v2024 = [Income 2024]",
+              "VAR v2010 = [Income 2010]",
+              "RETURN IF(v2010 > 0, ROUND(DIVIDE(v2024, v2010), 1), BLANK())"
+            ]
+          },
+          {
+            "name": "Deviation from Avg",
+            "displayFolder": "01_Income_Overview",
+            "formatString": "#,##0.00",
+            "expression": [
+              "VAR region_val = CALCULATE(AVERAGE(fact_income[income_pc]))",
+              "VAR national   = CALCULATE(AVERAGE(fact_income[income_pc]), ALL(dim_regions))",
+              "RETURN region_val - national"
+            ]
+          },
+          {
+            "name": "Deviation Pct from Avg",
+            "displayFolder": "01_Income_Overview",
+            "formatString": "0.0%",
+            "expression": [
+              "VAR region_val = CALCULATE(AVERAGE(fact_income[income_pc]))",
+              "VAR national   = CALCULATE(AVERAGE(fact_income[income_pc]), ALL(dim_regions))",
+              "RETURN DIVIDE(region_val - national, national, BLANK())"
+            ]
+          },
+          {
+            "name": "Income Quartile Label",
+            "displayFolder": "01_Income_Overview",
+            "expression": [
+              "VAR cur_income = CALCULATE(AVERAGE(fact_income[income_pc]), ALL(dim_calendar))",
+              "VAR rnk = RANKX(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc]), ALL(dim_calendar)), cur_income, ASC, DENSE)",
+              "RETURN SWITCH(TRUE(), rnk <= 3, \"Q1 — Past\", rnk <= 7, \"Q2 — Ortadan past\", rnk <= 10, \"Q3 — Ortadan yuqori\", \"Q4 — Yuqori\")"
+            ]
+          },
+
+          {
+            "name": "Absolute Gap",
+            "displayFolder": "02_Gap_Analysis",
+            "formatString": "#,##0.00",
+            "expression": "[Top Region Income] - [Bottom Region Income]"
+          },
+          {
+            "name": "Gap Ratio",
+            "displayFolder": "02_Gap_Analysis",
+            "formatString": "0.00\"x\"",
+            "expression": "DIVIDE([Top Region Income], [Bottom Region Income], BLANK())"
+          },
+          {
+            "name": "Gap Ratio 2024",
+            "displayFolder": "02_Gap_Analysis",
+            "formatString": "0.00\"x\"",
+            "expression": "CALCULATE([Gap Ratio], dim_calendar[year] = 2024)"
+          },
+          {
+            "name": "Gap Ratio 2010",
+            "displayFolder": "02_Gap_Analysis",
+            "formatString": "0.00\"x\"",
+            "expression": "CALCULATE([Gap Ratio], dim_calendar[year] = 2010)"
+          },
+          {
+            "name": "Gap Change Since 2010",
+            "displayFolder": "02_Gap_Analysis",
+            "formatString": "+0.00\"x\";-0.00\"x\"",
+            "expression": "[Gap Ratio 2024] - [Gap Ratio 2010]"
+          },
+          {
+            "name": "Gap Trend Label",
+            "displayFolder": "02_Gap_Analysis",
+            "expression": [
+              "VAR cur_year = SELECTEDVALUE(dim_calendar[year])",
+              "VAR cur_gap  = CALCULATE([Absolute Gap], dim_calendar[year] = cur_year)",
+              "VAR prv_gap  = CALCULATE([Absolute Gap], dim_calendar[year] = cur_year - 1)",
+              "RETURN IF(ISBLANK(prv_gap), \"—\", IF(cur_gap > prv_gap, \"▲ Kengaymoqda\", \"▼ Toraymoqda\"))"
+            ]
+          },
+          {
+            "name": "Tashkent Income",
+            "displayFolder": "02_Gap_Analysis",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE(AVERAGE(fact_income[income_pc]), dim_regions[region] = \"Toshkent sh.\")"
+          },
+          {
+            "name": "Karakalpakstan Income",
+            "displayFolder": "02_Gap_Analysis",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE(AVERAGE(fact_income[income_pc]), dim_regions[region] = \"Qoraqalpog'iston\")"
+          },
+
+          {
+            "name": "Total Sector Output",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "#,##0",
+            "expression": "SUM(fact_economy[construction]) + SUM(fact_economy[agriculture_output]) + SUM(fact_economy[retail_trade])"
+          },
+          {
+            "name": "Construction Share Pct",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "0.0%",
+            "expression": "DIVIDE(SUM(fact_economy[construction]), [Total Sector Output], 0)"
+          },
+          {
+            "name": "Agriculture Share Pct",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "0.0%",
+            "expression": "DIVIDE(SUM(fact_economy[agriculture_output]), [Total Sector Output], 0)"
+          },
+          {
+            "name": "Trade Share Pct",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "0.0%",
+            "expression": "DIVIDE(SUM(fact_economy[retail_trade]), [Total Sector Output], 0)"
+          },
+          {
+            "name": "Dominant Sector",
+            "displayFolder": "03_Sector_Structure",
+            "expression": [
+              "VAR c = SUM(fact_economy[construction])",
+              "VAR a = SUM(fact_economy[agriculture_output])",
+              "VAR t = SUM(fact_economy[retail_trade])",
+              "RETURN SWITCH(TRUE(), c >= a && c >= t, \"Qurilish\", a >= c && a >= t, \"Qishloq xo'jaligi\", \"Savdo\")"
+            ]
+          },
+          {
+            "name": "Construction Growth X",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "0.0\"x\"",
+            "expression": [
+              "VAR v2024 = CALCULATE(SUM(fact_economy[construction]),      dim_calendar[year] = 2024)",
+              "VAR v2010 = CALCULATE(SUM(fact_economy[construction]),      dim_calendar[year] = 2010)",
+              "RETURN IF(v2010 > 0, ROUND(DIVIDE(v2024, v2010), 1), BLANK())"
+            ]
+          },
+          {
+            "name": "Agriculture Growth X",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "0.0\"x\"",
+            "expression": [
+              "VAR v2024 = CALCULATE(SUM(fact_economy[agriculture_output]), dim_calendar[year] = 2024)",
+              "VAR v2010 = CALCULATE(SUM(fact_economy[agriculture_output]), dim_calendar[year] = 2010)",
+              "RETURN IF(v2010 > 0, ROUND(DIVIDE(v2024, v2010), 1), BLANK())"
+            ]
+          },
+          {
+            "name": "Trade Growth X",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "0.0\"x\"",
+            "expression": [
+              "VAR v2024 = CALCULATE(SUM(fact_economy[retail_trade]),       dim_calendar[year] = 2024)",
+              "VAR v2010 = CALCULATE(SUM(fact_economy[retail_trade]),       dim_calendar[year] = 2010)",
+              "RETURN IF(v2010 > 0, ROUND(DIVIDE(v2024, v2010), 1), BLANK())"
+            ]
+          },
+          {
+            "name": "Diversification Index",
+            "displayFolder": "03_Sector_Structure",
+            "formatString": "0.000",
+            "expression": [
+              "VAR s1 = [Construction Share Pct]",
+              "VAR s2 = [Agriculture Share Pct]",
+              "VAR s3 = [Trade Share Pct]",
+              "RETURN ROUND((s1*s1) + (s2*s2) + (s3*s3), 4)"
+            ]
+          },
+          {
+            "name": "Diversification Level",
+            "displayFolder": "03_Sector_Structure",
+            "expression": [
+              "VAR hhi = [Diversification Index]",
+              "RETURN SWITCH(TRUE(), hhi >= 0.55, \"Past diversifikatsiya\", hhi >= 0.40, \"O'rta diversifikatsiya\", \"Yaxshi diversifikatsiya\")"
+            ]
+          },
+
+          {
+            "name": "Avg Investment PC",
+            "displayFolder": "04_Drivers",
+            "formatString": "#,##0.00",
+            "expression": "AVERAGE(fact_income[inv_fixed_capital_pc])"
+          },
+          {
+            "name": "Investment YoY Pct",
+            "displayFolder": "04_Drivers",
+            "formatString": "0.0%",
+            "expression": [
+              "VAR cur_year = SELECTEDVALUE(dim_calendar[year])",
+              "VAR cur_val  = CALCULATE(AVERAGE(fact_income[inv_fixed_capital_pc]), dim_calendar[year] = cur_year)",
+              "VAR prv_val  = CALCULATE(AVERAGE(fact_income[inv_fixed_capital_pc]), dim_calendar[year] = cur_year - 1)",
+              "RETURN IF(NOT ISBLANK(prv_val) && prv_val <> 0, DIVIDE(cur_val - prv_val, prv_val), BLANK())"
+            ]
+          },
+          {
+            "name": "Investment Rank",
+            "displayFolder": "04_Drivers",
+            "formatString": "0",
+            "expression": [
+              "IF(HASONEVALUE(dim_regions[region]),",
+              "  RANKX(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[inv_fixed_capital_pc])), , DESC, DENSE))"
+            ]
+          },
+          {
+            "name": "Investment Index Normalized",
+            "displayFolder": "04_Drivers",
+            "formatString": "0.0",
+            "expression": [
+              "VAR val     = CALCULATE(AVERAGE(fact_income[inv_fixed_capital_pc]))",
+              "VAR min_val = MINX(FILTER(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[inv_fixed_capital_pc])) > 0), CALCULATE(AVERAGE(fact_income[inv_fixed_capital_pc])))",
+              "VAR max_val = MAXX(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[inv_fixed_capital_pc])))",
+              "RETURN ROUND(DIVIDE(val - min_val, max_val - min_val, BLANK()) * 100, 1)"
+            ]
+          },
+          {
+            "name": "Income Index Normalized",
+            "displayFolder": "04_Drivers",
+            "formatString": "0.0",
+            "expression": [
+              "VAR val     = CALCULATE(AVERAGE(fact_income[income_pc]))",
+              "VAR min_val = MINX(FILTER(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])) > 0), CALCULATE(AVERAGE(fact_income[income_pc])))",
+              "VAR max_val = MAXX(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])))",
+              "RETURN ROUND(DIVIDE(val - min_val, max_val - min_val, BLANK()) * 100, 1)"
+            ]
+          },
+          {
+            "name": "Employment Rate Pct",
+            "displayFolder": "04_Drivers",
+            "formatString": "0.0%",
+            "expression": "DIVIDE(SUM(fact_demographics[employed_thousand]), SUM(fact_demographics[econ_active_thousand]), BLANK())"
+          },
+          {
+            "name": "Unemployment Rate Pct",
+            "displayFolder": "04_Drivers",
+            "formatString": "0.0%",
+            "expression": "DIVIDE(SUM(fact_demographics[unemployed_thousand]), SUM(fact_demographics[econ_active_thousand]), BLANK())"
+          },
+          {
+            "name": "Total Enterprises",
+            "displayFolder": "04_Drivers",
+            "formatString": "#,##0",
+            "expression": "SUM(fact_demographics[active_enterprises_count])"
+          },
+          {
+            "name": "GRP Total",
+            "displayFolder": "04_Drivers",
+            "formatString": "#,##0",
+            "expression": "SUM(fact_income[grp])"
+          },
+          {
+            "name": "Foreign Trade Total",
+            "displayFolder": "04_Drivers",
+            "formatString": "#,##0",
+            "expression": "SUM(fact_economy[foreign_trade_turnover])"
+          },
+
+          {
+            "name": "KPI National Avg 2024",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE(AVERAGE(fact_income[income_pc]), dim_calendar[year] = 2024, ALL(dim_regions))"
+          },
+          {
+            "name": "KPI Top Income 2024",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE([Top Region Income], dim_calendar[year] = 2024)"
+          },
+          {
+            "name": "KPI Bottom Income 2024",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE([Bottom Region Income], dim_calendar[year] = 2024)"
+          },
+          {
+            "name": "KPI Gap Ratio 2024",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "0.00\"x\"",
+            "expression": "CALCULATE([Gap Ratio], dim_calendar[year] = 2024, ALL(dim_regions))"
+          },
+          {
+            "name": "KPI Absolute Gap 2024",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "#,##0.00",
+            "expression": "CALCULATE([Absolute Gap], dim_calendar[year] = 2024, ALL(dim_regions))"
+          },
+          {
+            "name": "KPI Growth Multiplier",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "0.0\"x\"",
+            "expression": "CALCULATE([Growth Multiplier], ALL(dim_regions))"
+          },
+          {
+            "name": "KPI Total Population 2024",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "#,##0.0",
+            "expression": "CALCULATE(SUM(fact_demographics[population_permanent]), dim_calendar[year] = 2024, dim_regions[region] = \"O'zbekiston\")"
+          },
+          {
+            "name": "KPI Enterprises 2024",
+            "displayFolder": "05_KPI_Cards",
+            "formatString": "#,##0",
+            "expression": "CALCULATE(SUM(fact_demographics[active_enterprises_count]), dim_calendar[year] = 2024, dim_regions[region] = \"O'zbekiston\")"
+          },
+          {
+            "name": "Color Income Bar",
+            "displayFolder": "06_Formatting",
+            "expression": [
+              "VAR val     = CALCULATE(AVERAGE(fact_income[income_pc]))",
+              "VAR max_val = MAXX(ALL(dim_regions[region]), CALCULATE(AVERAGE(fact_income[income_pc])))",
+              "VAR norm    = DIVIDE(val, max_val, 0)",
+              "RETURN SWITCH(TRUE(), norm >= 0.75, \"#1A5276\", norm >= 0.50, \"#2E86C1\", norm >= 0.25, \"#85C1E9\", \"#D6EAF8\")"
+            ]
+          },
+          {
+            "name": "Color YoY Arrow",
+            "displayFolder": "06_Formatting",
+            "expression": "IF(ISNUMBER([YoY Growth Pct]) && [YoY Growth Pct] >= 0, \"#27AE60\", \"#C0392B\")"
+          },
+          {
+            "name": "Color Gap Ratio",
+            "displayFolder": "06_Formatting",
+            "expression": [
+              "VAR r = [Gap Ratio]",
+              "RETURN SWITCH(TRUE(), r >= 6.0, \"#C0392B\", r >= 4.0, \"#E67E22\", r >= 2.5, \"#F1C40F\", \"#27AE60\")"
+            ]
+          },
+          {
+            "name": "Color Deviation Bar",
+            "displayFolder": "06_Formatting",
+            "expression": "IF([Deviation from Avg] >= 0, \"#2E86C1\", \"#E74C3C\")"
+          },
+          {
+            "name": "Icon YoY",
+            "displayFolder": "06_Formatting",
+            "expression": [
+              "VAR g = [YoY Growth Pct]",
+              "RETURN SWITCH(TRUE(), ISBLANK(g), \"—\", g >= 0.15, \"🚀 Tez o'smoqda\", g >= 0.05, \"📈 O'smoqda\", g >= 0, \"➡️ Barqaror\", g >= -0.05, \"📉 Pasaydi\", \"⚠️ Keskin pasaydi\")"
+            ]
+          },
+          {
+            "name": "Natural Growth Rate",
+            "displayFolder": "07_Demographics",
+            "formatString": "0.0",
+            "expression": [
+              "VAR births = SUM(fact_demographics[births_total])",
+              "VAR deaths = SUM(fact_demographics[fact_deaths])",
+              "VAR pop    = SUM(fact_demographics[population_permanent])",
+              "RETURN DIVIDE((births - deaths), pop, BLANK()) * 1000"
+            ]
+          },
+          {
+            "name": "Births per 1000",
+            "displayFolder": "07_Demographics",
+            "formatString": "0.0",
+            "expression": "DIVIDE(SUM(fact_demographics[births_total]), SUM(fact_demographics[population_permanent]), BLANK()) * 1000"
+          },
+          {
+            "name": "Deaths per 1000",
+            "displayFolder": "07_Demographics",
+            "formatString": "0.0",
+            "expression": "DIVIDE(SUM(fact_demographics[fact_deaths]), SUM(fact_demographics[population_permanent]), BLANK()) * 1000"
+          },
+          {
+            "name": "Enterprises per 1000 Pop",
+            "displayFolder": "07_Demographics",
+            "formatString": "0.0",
+            "expression": "DIVIDE(SUM(fact_demographics[active_enterprises_count]), SUM(fact_demographics[population_permanent]), BLANK())"
+          }
+        ]
+      }
+    ],
+
+    "relationships": [
+      {
+        "name": "fact_income_dim_regions",
+        "fromTable": "fact_income", "fromColumn": "region",
+        "toTable": "dim_regions",   "toColumn": "region",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "fact_income_dim_calendar",
+        "fromTable": "fact_income", "fromColumn": "year",
+        "toTable": "dim_calendar",  "toColumn": "year",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "fact_economy_dim_regions",
+        "fromTable": "fact_economy", "fromColumn": "region",
+        "toTable": "dim_regions",    "toColumn": "region",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "fact_economy_dim_calendar",
+        "fromTable": "fact_economy", "fromColumn": "year",
+        "toTable": "dim_calendar",   "toColumn": "year",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "fact_demographics_dim_regions",
+        "fromTable": "fact_demographics", "fromColumn": "region",
+        "toTable": "dim_regions",         "toColumn": "region",
+        "crossFilteringBehavior": "oneDirection"
+      },
+      {
+        "name": "fact_demographics_dim_calendar",
+        "fromTable": "fact_demographics", "fromColumn": "year",
+        "toTable": "dim_calendar",        "toColumn": "year",
+        "crossFilteringBehavior": "oneDirection"
+      }
+    ],
+    "annotations": [
+      { "name": "PBI_QueryOrder", "value": "[\"dim_calendar\",\"dim_regions\",\"fact_income\",\"fact_economy\",\"fact_demographics\",\"_Measures\"]" }
+    ]
+  }
+}
